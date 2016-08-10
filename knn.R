@@ -1,5 +1,5 @@
 # KNN  41.53654%  after scaling its 34.25%
-library (class)
+library(class)
 
 train <- read.csv(file="training.csv")
 test <- read.csv(file="test.csv")
@@ -23,8 +23,8 @@ train.X = scale(cbind(aTrain[,3:12]))
 test.X = scale(cbind(vTrain[,3:12]))
 # A vector containing the class labels for the training observations
 train.relevance = aTrain$relevance
-
-# Tuning for k
+train.err <- rep(NA, length(lambdas))
+# Tuning for k using LOOCV
 for(i in seq(200,300,5)){
   cross = knn.cv(train.X,train.relevance,k=i)
   table(cross,aTrain$relevance)
