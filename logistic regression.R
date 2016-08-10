@@ -1,5 +1,4 @@
-
-# Logistic regression model  -Fitting log-odds to be linear in X
+# Logistic regression model - Fitting log-odds to be linear in X
 
 # 36.41474 -> 36.40225% Error rates
 

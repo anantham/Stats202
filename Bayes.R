@@ -1,11 +1,10 @@
-
 # Naive Bayes - 39.50229 error rate
 
 # k for K-FOLD CROSS VALIDATION
-k = 10
+k = 9
 
 # I use caret instead of e1071 cause I want to use cross validation
-#library('caret')
+library('caret')
 
 train <- read.csv(file="training.csv")
 test <- read.csv(file="test.csv")
