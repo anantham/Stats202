@@ -44,4 +44,5 @@ mean(vTrain$relevance!=predictions)*100
 test <- read.csv(file="test.csv")
 inputTest = test[,-c(1,2)]
 predictions <- predict(object=objModel, inputTest[,predictorsNames], type='raw')
-write.table(predictions,file="actualSolutions.txt",quote=F,row.names = F,col.names = F)
+predictions <- revalue(predictions, c("Yes"="1", "No"="0"))
+write.table(predictions,file="actualSolutions1.txt",quote=F,row.names = F,col.names = F)

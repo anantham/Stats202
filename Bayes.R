@@ -1,4 +1,4 @@
-# Naive Bayes
+# Naive Bayes - 37.01899%
 
 # Error rate for normal Naive Bayes with and without scaleing:  40.11119
 # Error rate for normal Naive Bayes without sig5: 39.73638 (without scaling = 39.76137)
@@ -22,6 +22,9 @@ test = raw_test
 train$relevance <- as.factor(train$relevance)
 train$is_homepage <- as.factor(train$is_homepage)
 train$relevance <- revalue(train$relevance, c("1"="Yes", "0"="No"))
+train$sig3 = log(train$sig3+1)
+train$sig4 = log(train$sig4+1)
+train$sig5 = log(train$sig5+1)
 
 # we use 80% for training and rest for validation
 set.seed(2325)
@@ -30,10 +33,10 @@ training <- train[ inTraining,]
 testing  <- train[-inTraining,]
 
 # index 9 is for sig5
-train.predictors = training[,-c(1,2,9,13)]
+train.predictors = training[,-c(1,2,13)]
 train.response = training[,13]
 
-test.predictors = testing[,-c(1,2,9,13)]
+test.predictors = testing[,-c(1,2,13)]
 test.response = testing[,13]
 
 # I use K-fold cross validation - "cv"

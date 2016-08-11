@@ -13,9 +13,9 @@ train$is_homepage <- as.factor(train$is_homepage)
 
 train = train[,-c(1,2)]
 
-# One of the benefits of decision trees is that ordinal (continuous or discrete) input data does not require
-# any significant preprocessing. In fact, the results should be consistent regardless of any scaling or 
-# translational normalization, since the trees can choose equivalent splitting points. 
+train$sig3 = log(train$sig3+1)
+train$sig4 = log(train$sig4+1)
+train$sig5 = log(train$sig5+1)
 
 set.seed(2325)
 # Using all 10 predictors => bagging = bootstrap aggregating

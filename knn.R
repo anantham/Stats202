@@ -6,13 +6,16 @@ test <- read.csv(file="test.csv")
 
 # Correct the data types
 train$relevance <- as.factor(train$relevance)
+# train$sig3 = log(train$sig3+1)
+# train$sig4 = log(train$sig4+1)
+# train$sig5 = log(train$sig5+1)
 
 # Because the KNN classifier predicts the class of a given test observation by
 # identifying the observations that are nearest to it, the scale of the variables
 # matters. Any variables that are on a large scale will have a much larger
 # effect on the distance between the observations, and hence on the KNN
 # classifier, than variables that are on a small scale.
-
+set.seed(2325)
 train_indices = sample(1:dim(train)[1], dim(train)[1]*0.8)
 
 aTrain <- train[train_indices, ]
@@ -21,23 +24,71 @@ vTrain <- train[-train_indices, ]
 # A matrix containing the predictors associated with the data for train and test
 train.X = scale(cbind(aTrain[,3:12]))
 test.X = scale(cbind(vTrain[,3:12]))
+
 # A vector containing the class labels for the training observations
 train.relevance = aTrain$relevance
-train.err <- rep(NA, length(lambdas))
-# Tuning for k using LOOCV
-for(i in seq(200,300,5)){
-  cross = knn.cv(train.X,train.relevance,k=i)
-  table(cross,aTrain$relevance)
-  cat("\n\n Error rate for KNN ", mean(cross!=aTrain$relevance)*100)
-  cat("\nk = ",i)
-}
 
-# A value for K, the number of nearest neighbors to be used by the classifier
-k = 300
+kSet = c(1,2,10,50,100,150,200,250,300,350,400,450)
+train.err <- rep(NA, length(kSet))
+
+#Tuning for k using LOOCV
+# for(i in 1:length(kSet)){
+#   loocv.pred = knn.cv(train.X,train.relevance,k=kSet[i])
+#   table(loocv.pred,aTrain$relevance)
+#   cat("\n\n Error rate for KNN ", mean(loocv.pred!=aTrain$relevance)*100)
+#   cat("\nk = ",kSet[i])
+# }
+
+# A value for K, the number of nearest neighbors to be used by the classifier (found by cv)
+k = 200
 set.seed(2325)
 knn.pred = knn(train.X, test.X, train.relevance, k)
-table(knn.pred,vTrain$relevance)
+conf = table(knn.pred,vTrain$relevance)
+plot(conf)
 cat("\n\n Error rate for KNN ", mean(knn.pred!=vTrain$relevance)*100)
+
+ 
+# LOOCV, k = 300 is the optimal value
+loocv.err = c(42.31214, 42.13411, 37.40396, 34.54463, 34.23699, 34.09488, 34.1308, 34.11362, 34.08551, 34.11206, 34.16047, 34.12924)
+kSet = c(1, 2, 10, 50, 100, 150, 200, 250, 300, 350, 400, 450)
+plot(kSet,loocv.err,type ="b")
+
+# Error rate for KNN  42.31214
+# k =  1
+# 
+# Error rate for KNN  42.13411
+# k =  2
+# 
+# Error rate for KNN  37.40396
+# k =  10
+# 
+# Error rate for KNN  34.54463
+# k =  50
+# 
+# Error rate for KNN  34.23699
+# k =  100
+# 
+# Error rate for KNN  34.09488
+# k =  150
+# 
+# Error rate for KNN  34.1308
+# k =  200
+# 
+# Error rate for KNN  34.11362
+# k =  250
+# 
+# Error rate for KNN  34.08551
+# k =  300
+# 
+# Error rate for KNN  34.11206
+# k =  350
+# 
+# Error rate for KNN  34.16047
+# k =  400
+# 
+# Error rate for KNN  34.12924
+# k =  450
+
 
 
 
