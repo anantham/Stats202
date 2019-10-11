@@ -1,7 +1,7 @@
 # Stats202
-A binary classifier for [Stats202](https://sites.google.com/site/stats202/class-project-2012).
+A binary classifier for [Stats202](https://web.archive.org/web/20140922050041/https://sites.google.com/site/stats202/course-information).
 
-This is for the course being taken by Professor Rajan Patel during the summer session 2016.
+This is for the course being taken by [Professor Rajan Patel](https://ai.google/research/people/author37597) during the summer session 2016.
 
 The following is my report,
 
