@@ -4,7 +4,7 @@ This project was done as part of the course [stats202](https://web.archive.org/w
 
 ### Objective
 
-To train a binary classifier with $10$ signals which are in some way properties of "the query" as well as "the web page". For example the first two signals are query_length ( a property solely of the query ) and is_homepage ( a property solely of the webpage ), likewise the remaining $8$ signals - $sig1, sig2, ... sig8$ are some unknown function of both "the query" as well as "the web page". This obfuscation was delibrate to ensure we built a classifier that would generalize well beyond this specific data.
+To train a binary classifier with 10 signals which are in some way properties of "the query" as well as "the web page". For example the first two signals are query_length ( a property solely of the query ) and is_homepage ( a property solely of the webpage ), likewise the remaining 8 signals - sig1, sig2, ... sig8 are some unknown function of both "the query" as well as "the web page". This obfuscation was delibrate to ensure we built a classifier that would generalize well beyond this specific data.
 
 ### My Approach
 
